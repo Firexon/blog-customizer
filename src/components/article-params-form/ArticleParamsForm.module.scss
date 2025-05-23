@@ -16,6 +16,7 @@
 	display: flex;
 	flex-shrink: 0;
 	flex-direction: column;
+	gap: 50px;
 	box-sizing: border-box;
 	width: 616px;
 	height: auto;
@@ -25,12 +26,9 @@
 	border-right: 1px solid #000000;
 }
 
-.form > *:not(:last-child) {
-	margin-bottom: 50px;
-}
-
 .bottomContainer {
 	display: flex;
 	justify-content: space-between;
 	margin-top: auto;
+	padding-top: 145px;
 }

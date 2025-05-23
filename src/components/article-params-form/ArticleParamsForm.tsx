@@ -63,7 +63,7 @@ export const ArticleParamsForm = ({
 	};
 
 	const ref = useRef<HTMLDivElement | null>(null);
-	const enterRef = useRef<HTMLDivElement | null>(null);
+	const enterRef = useRef<HTMLFormElement | null>(null);
 
 	useOutsideClickClose({
 		isOpen: isSidebarOpen,
@@ -74,13 +74,14 @@ export const ArticleParamsForm = ({
 
 	useEffect(() => {
 		const handleEscKeyDown = (event: KeyboardEvent) => {
-			if (event.key === 'Escape' && isSidebarOpen) {
+			if (event.key === 'Escape') {
 				setSidebarIsOpen(false);
 			}
 		};
 
-		document.addEventListener('keydown', handleEscKeyDown);
+		if (!isSidebarOpen) return;
 
+		document.addEventListener('keydown', handleEscKeyDown);
 		return () => {
 			document.removeEventListener('keydown', handleEscKeyDown);
 		};
@@ -103,6 +104,7 @@ export const ArticleParamsForm = ({
 				})}>
 				<form
 					className={styles.form}
+					ref={enterRef}
 					onSubmit={(e) => {
 						e.preventDefault();
 						applyChanges();
@@ -111,40 +113,40 @@ export const ArticleParamsForm = ({
 					<Text size={31} weight={800} uppercase>
 						Задайте параметры
 					</Text>
-					<div ref={enterRef}>
-						<Select
-							selected={fontFamily}
-							options={fontFamilyOptions}
-							title='шрифт'
-							onChange={setFontFamily}
-						/>
-						<RadioGroup
-							selected={fontSize}
-							options={fontSizeOptions}
-							name='fontSize'
-							title='размер шрифта'
-							onChange={setFontSize}
-						/>
-						<Select
-							selected={fontColor}
-							options={fontColors}
-							title='цвет шрифта'
-							onChange={setFontColor}
-						/>
-						<Separator />
-						<Select
-							selected={backgroundColor}
-							options={backgroundColors}
-							title='цвет фона'
-							onChange={setBackgroundColor}
-						/>
-						<Select
-							selected={contentWidth}
-							options={contentWidthArr}
-							title='ширина контента'
-							onChange={setContentWidth}
-						/>
-					</div>
+
+					<Select
+						selected={fontFamily}
+						options={fontFamilyOptions}
+						title='шрифт'
+						onChange={setFontFamily}
+					/>
+					<RadioGroup
+						selected={fontSize}
+						options={fontSizeOptions}
+						name='fontSize'
+						title='размер шрифта'
+						onChange={setFontSize}
+					/>
+					<Select
+						selected={fontColor}
+						options={fontColors}
+						title='цвет шрифта'
+						onChange={setFontColor}
+					/>
+					<Separator />
+					<Select
+						selected={backgroundColor}
+						options={backgroundColors}
+						title='цвет фона'
+						onChange={setBackgroundColor}
+					/>
+					<Select
+						selected={contentWidth}
+						options={contentWidthArr}
+						title='ширина контента'
+						onChange={setContentWidth}
+					/>
+
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' htmlType='reset' type='clear' />
 						<Button title='Применить' htmlType='submit' type='apply' />
