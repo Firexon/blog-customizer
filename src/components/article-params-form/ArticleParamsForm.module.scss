@@ -25,6 +25,10 @@
 	border-right: 1px solid #000000;
 }
 
+.form > *:not(:last-child) {
+	margin-bottom: 50px;
+}
+
 .bottomContainer {
 	display: flex;
 	justify-content: space-between;
